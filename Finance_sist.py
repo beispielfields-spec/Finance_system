@@ -44,6 +44,19 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+from pathlib import Path
+
+arquivo_db = Path("financas.db")
+
+if arquivo_db.exists():
+    st.download_button(
+        label="Baixar backup do banco",
+        data=arquivo_db.read_bytes(),
+        file_name="financas_backup.db",
+        mime="application/octet-stream",
+    )
+else:
+    st.warning("O arquivo do banco de dados não foi encontrado.")
 # ------------------------------------------------------------------
 # 2. Conexão e criação de tabelas (se ainda não existirem)
 # ------------------------------------------------------------------
